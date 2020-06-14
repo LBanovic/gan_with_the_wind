@@ -5,12 +5,14 @@ import scipy
 import numpy as np
 import os
 
+inception = InceptionV3(include_top=False, pooling='avg', input_shape=shape)
+
 def scale(images, shape):
     for image in images:
         yield resize(image, shape, 0)
 
+
 def FID(model, dataset, shape=(128, 128, 3)):
-    inception = InceptionV3(include_top=False, pooling='avg', input_shape=shape)
     images_fake = []
     images_real = []
 
@@ -67,5 +69,6 @@ if __name__ == '__main__':
                 gan.restore_from_checkpoint(directory, epoch)
                 fid = FID(gan, test_ds)
                 results.append(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
+        del gan
     with open(f'{models_dir}.json') as dirjson:
         json.dump(results, dirjson)
