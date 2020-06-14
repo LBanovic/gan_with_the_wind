@@ -41,26 +41,31 @@ def get_savedir(res, model_dir):
 if __name__ == '__main__':
 
     import sys
+    import json
     from progressive_growing_gan import model
 
     input_dim = 128
     input_channels = 3
+    batch_size = 128
 
-    model_dir = sys.argv[1]
-    epoch = sys.argv[2]
-    celeba_loc = sys.argv[3]
-    res = int(sys.argv[4])
+    celeba_loc = sys.argv[1]
+    models_dir = sys.argv[2]
 
-    gan = model.sndcgan(get_savedir(res, model_dir), res, input_channels, input_dim, 0, 0)
-    gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
-    gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
-    gan.restore_from_checkpoint(get_savedir(res, model_dir), epoch=epoch)
+    results = []
 
-    loader = CelebALoader(celeba_loc, res)
-    train_ds, test_ds = loader.load(64, input_dim)
-
-    # TESTING
-    test_ds = test_ds.take(10)
-
-    fid = FID(gan, test_ds)
-    print(f'Resolution: {2 ** res}, FID = {fid}')
+    for model_dir in os.listdir(models_dir):
+        res = int(model_dir.split('x')[0])
+        directory = os.path.join(models_dir, model_dir)
+        gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
+        gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
+        gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
+        for epoch in os.listdir(directory):
+            loader = CelebALoader(celeba_loc, res)
+            train_ds, test_ds = loader.load(128, input_dim)
+            if epoch != 'images':
+                epoch = epoch[:-len('_epoch')]
+                gan.restore_from_checkpoint(directory, epoch)
+                fid = FID(gan, test_ds)
+                results.append(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
+    with open(f'{models_dir}.json') as dirjson:
+        json.dump(results, dirjson)
