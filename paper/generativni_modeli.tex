@@ -1,0 +1,49 @@
+\section{Generativni modeli}
+Da bismo objasnili princip rada generativnih suparničkih mreža, prvo objasnimo koji zadatak pokušavamo riješiti.
+
+Pretpostavimo da raspolažemo skupom slika. Grubo rečeno, pokušavamo generirati nove slike tako da ih ne možemo razlikovati od ostalih slika u skupu. Trivijalno bi rješenje bilo da kopiramo jednu od slika, ali time ne dobivamo nikakvu novu vrijednost. To, dakle, zahtijeva od našeg odabranog modela da uspješno pronađe značajke zajedničke ulaznim slikama. One moraju biti reproducirane na izlaznoj slici, a ostale značajke se mogu smatrati slučajnostima koje čine slike međusobno različitima. Dakle, naš originalni zadatak možemo razdvojiti na dva podzadatka: ekstrakcija bitnih faktora koji uspješno reprezentiraju naš ulazni skup slika te dodavanje slučajnosti u novo generirane slike. 
+
+Pokušajmo sada matematički opisati izazov koji je pred nas postavljen. Prvo, definirajmo kao vektor značajki $\vec{x} = (x_1, x_2, ..., x_n)$. $\vec{x}$ je točka u \textit{ulaznom prostoru} kojeg ćemo označiti s $\mathcal{X}$. Međutim, mi raspolažemo samo podskupom tog prostora $\mathcal{D} = \{\vec{x}\}_{i=1}^N \subseteq \mathcal{X}$. Cilj generativnog modela, parametriziranog parametrima $\vec{\theta}$, jest na neki način, eksplicitno ili implicitno, modelirati vjerojatnosnu distribuciju ulaznog prostora $p(\vec{x};\vec{\theta})$. Uobičajeno, to postižemo maksimizacijom izglednosti ulaznih uzoraka. Izglednost je uvjetna vjerojatnost ulaznog primjera uz dane parametre modela, tj.
+\begin{equation*}
+	\mathcal{L}(\vec{\theta}|\vec{x}) \equiv p(\vec{x}|\vec{\theta}) .
+\end{equation*}
+Zapis $\mathcal{L}(\vec{\theta}|\vec{x})$ koristi se da bismo naglasili da se radi o funkciji parametara, a ne ulaznih primjera. Proširimo li ovaj izraz na cijeli skup ulaznih primjera $\mathcal{D}$, dobivamo
+\begin{equation*}
+	\mathcal{L}(\vec{\theta}|\mathcal{D}) = \prod_{\vec{x} \in \mathcal{D}} p(\vec{x}|\vec{\theta})
+\end{equation*}
+Radi numeričke stabilnosti, pokušat ćemo izbjeći računanje ovog produkta. Da bismo to postigli, preći ćemo u logaritamski prostor - optimizator naše funkcije je ujedno optimizator i njezina logaritamskog ekvivalenta. Dobivamo sljedeći izraz:
+\begin{align*}
+	\ln \mathcal{L}(\vec{\theta}|\mathcal{D}) 
+	= \ln \prod_{\vec{x} \in \mathcal{D}} p(\vec{x}|\vec{\theta})
+	= \sum_{\vec{x} \in \mathcal{D}}\ln p(\vec{x}|\vec{\theta})
+\end{align*}
+Napokon, općeniti zadatak generativnog modela možemo formulirati kao problem pronalaska skupa parametara modela koji maksimiziraju log-izglednost ulaznog skupa podataka, ili formalno:
+\begin{equation*}
+	\vec{\theta}^* = \operatorname*{arg\,max}_\theta \ln \mathcal{L}(\vec{\theta}|\mathcal{D})
+\end{equation*}
+
+Već smo spomenuli da modeli mogu eksplicitno ili implicitno modelirati vjerojatnosnu distribuciju ulaznog prostora. Optimizacijski postupak kod eksplicitnog modeliranja svodi se na uvrštavanje definicije modela u izraz za log-izglednost te pronalazak parametara koji ga maksimiziraju nekim od algoritama za optimizaciju funkcija. Međutim, nije sve tako jednostavno - kod odabira odgovarajućeg modela ove vrste moramo napraviti kompromis između ekspresivnosti i traktabilnosti. 
+
+Pokažimo na primjeru što to točno znači. Recimo da smo odlučili modelirati funkciju gustoće skupa $\mathcal{D}$ kao mješavinu nekoliko različitih Gaussovih razdioba, od kojih svaka ima svoje očekivanje $\vec{\mu}$ te matricu kovarijanci $\Sigma$. Prilikom generiranja novog primjera, moramo odabrati jednu od razdioba u mješavini te iz nje uzorkovati novi primjer. Ovaj odabir možemo opisati pomoću kategoričke razdiobe, gdje znamo vjerojatnost odabira bilo koje od naših Gaussovih razdioba (kojih ima konačno mnogo). Označimo funkciju gustoće ove kategoričke razdiobe s $p(z)$, gdje $z = i$ ako je $i$-ta komponenta odabrana za generiranje, $1 \leq i \leq k$. Koristeći ovu notaciju i pravilo lanca, možemo odrediti zajedničku vjerojatnost generiranja uzoraka iz jedne od komponenata mješavine:
+\begin{equation*}
+	p(\vec{x}, z) = p(z)p(\vec{x}|z) = p(z) \mathcal{N}(\vec{x}|\mu_z, \Sigma_z)
+\end{equation*}
+Marginalizacijom po varijabli $\vec{z}$ napokon dobivamo razdiobu ulaznih primjera:
+\begin{equation*}
+	p(\vec{x}) = \sum_{z=1}^k p(z)\mathcal{N}(\vec{x}|\mu_z, \Sigma_z)
+\end{equation*}
+Zasad nemamo problema sa složenosti ovog izračuna. Međutim, pretpostavimo da je za naše potrebe nužno da varijabla $z$ postane kontinuirana. Time naš model dobiva na ekspresivnosti, ali gustoća vjerojatnosti tada postaje:
+\begin{equation*}
+	p(\vec{x}) = \int p(z)\mathcal{N}(\vec{x}|\mu_z, \Sigma_z)dx
+\end{equation*}
+Izračun ovog izraza je vremenski vrlo složen te se u praksi pribjegava aproksimacijama da bi se složenost ublažila, kao što je određivanje donje granice log-izglednosti. \todo{VAE ref}
+
+Naravno, potrebno je napomenuti da odabir omjera traktabilnosti i ekspresivnosti itekako ovisi o problemu na koje ćemo primijeniti model.
+
+S druge strane, modeli koji implicitno modeliraju distribuciju ulaznog prostora te ih se može trenirati kao crne kutije, bez da nam je poznata funkcija gustoće na kojoj se temelji njihov postupak generiranja. Postupak treniranja uglavnom se oslanja na ocjenu kvalitete generiranih primjera, a ne procjenu parametara pretpostavljene funkcije gustoće.
+
+\todo {wrap it up nicely}
+
+
+
+

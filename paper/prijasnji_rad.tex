@@ -1,0 +1,20 @@
+\section{Dosadašnji napredak}
+\label{prijasnji_rad}
+\todo{cyclegan, stylegan, dcgan, lucic/kurach 2 rada, improved techniques for training gans, conditional gans, progressive gan, wgan}
+U ovom odjeljku, cilj nam je predstaviti radove koji su snažno utjecali na smjer istraživanja generativnih suparničkih mreža. Iako je ovaj radni okvir definiran tek 2014. \todo{ref originalni rad}, atraktivno je područje u dubokom učenju te je koncept korišten u mnogim izazovima.
+
+Spomenuli smo ranije da se istraživanje generativnih suparničkih mreža ugrubo može podijeliti u dvije grane: unaprijeđivanje kvalitete generiranih slika i poboljšavanje stabilnosti treniranja. Kako su u prethodnim odjeljcima prikazane relevantne tehnike za unaprijeđivanje treniranja, ovdje će fokus biti na napretcima u kvaliteti generiranja.
+
+Jedno od najranijih opažanja jest da generativnim suparničkim mrežama pogoduje znanje o oznakama primjera koje trebaju generirati \todo{ref Conditional Generative Adversarial Nets}. Autori su uveli malu promjenu u formulaciju minimax igre - umjesto izlaza diskriminatora $D(\vec{x})$ i generatora $G(\vec{x})$ promatramo uvjetne izlaze $D(\vec{x}\|\vec{y})$ i $G(\vec{z}\|\vec{y})$, gdje je $\vec{y}$ oznaka primjera u \textit{one-hot} obliku.
+
+Nešto kasnije, predložene su smjernice za dizajn dubokih generativnih suparničkih mreža s konvolucijskim slojevima \todo{ref UNSUPERVISED REPRESENTATION LEARNING WITH DEEP CONVOLUTIONAL GENERATIVE ADVERSARIAL NETWORKS} koje su postali polazna točka za istraživanje u idućim godinama. Među smjernicama su, između ostaloga, uporaba normalizacije po grupama, korištenje zglobnice kao aktivacijske funkcije te eliminacija potpuno povezanih skrivenih slojeva u mrežama.
+
+Grupa istraživača iz tvrtke NVIDIA predložili su poboljšanu proceduru učenja generativnih suparničkih mreža koja se temelji na progresivnom učenju različitih rezolucija ulaznih slika, počevši od najmanje. \todo{ref proggan} Ovo je varijanta poznate tehnike za treniranje neuronskih mreža pod nazivom nadzirano predtreniranje, prilagođene za generativni problem.
+
+Isti autori su kao nadogradnju prethodnoga modela predložili arhitekturu temeljenu na odvajanju učenja stila (koji je neovisan o rasporedu elemenata na slici) i strukture kojoj ti elementi podliježu \todo{ref stylegan}. Ovim su pristupom, osim što su proizveli izvrsne rezultate, omogućili i određen stupanj kontrole nad generiranim slikama, što dotad nije bio slučaj.
+
+Osim toga, generativne suparničke mreže primijenjene su i na problem prevođenja slike u sliku - poznat primjer je zamjena konja na slikama zebrama i obrnuto. Osnovna je ideja vrlo jednostavna. Pretpostavimo da imamo početnu pretpostavku o potrebnom mapiranju i njegovu inverzu. Ukoliko je savršeno mapiranje, primijenimo li prvo njega pa njegov inverz, trebali bismo dobiti početnu sliku. Upravo ovu razliku pokušava minimizirati predloženi model.
+
+\todo{vizualizacija SOTA rezultata - stylegan, cyclegan?}
+
+Komentirajmo još kratko tehnike stabilizacije treniranja generativnih suparničkih mreža. Grupa autora je u dva rada \todo{ref gan landscape, are gans created equal} provela brojne eksperimente kojima su ispitali dosad predložene načine učenja, tehnike regularizacije i normalizacije. Ispostavlja se da odabir funkcije gubitka ovisi o skupu podataka na kojemu radimo, ali dodatak spektralne normalizacije i gradijentne kazne poboljšavaju krajnji rezultat. Zato predlažu minimizaciju Kullback-Leiblerove divergencije uz spektralnu normalizaciju kao dobru početnu točku za primjenu generativnih suparničkih mreža na nove skupove podataka. 

@@ -1,0 +1,60 @@
+\documentclass[times, utf8, diplomski]{fer}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\newcommand\todo[1]{\textcolor{red}{#1}}
+
+\begin{document}
+
+% TODO: Navedite broj rada.
+\thesisnumber{\todo{thesis number}}
+
+% TODO: Navedite naslov rada.
+\title{Primjena generativnih suparničkih mreža na generiranje slika}
+
+% TODO: Navedite vaše ime i prezime.
+\author{Luka Banović}
+
+\maketitle
+
+% Ispis stranice s napomenom o umetanju izvornika rada. Uklonite naredbu \izvornik ako želite izbaciti tu stranicu.
+\izvornik
+
+% Dodavanje zahvale ili prazne stranice. Ako ne želite dodati zahvalu, naredbu ostavite radi prazne stranice.
+\zahvala{}
+
+\tableofcontents
+
+\include{uvod}
+\include{generativni_modeli}
+\include{duboke_mreze}
+\include{generativne_suparnicke}
+\include{pregled_podrucja}
+\include{funkcije_pogreske}
+\include{normalizacija_regularizacija}
+\include{elementi_arhitekture}
+\include{prijasnji_rad}
+\include{prototip}
+\include{treniranje}
+\include{rezultati}
+\chapter{Zaključak}
+Zaključak.
+
+\bibliography{literatura}
+\bibliographystyle{fer}
+
+\begin{sazetak}
+Sažetak na hrvatskom jeziku.
+
+\kljucnerijeci{Ključne riječi, odvojene zarezima.}
+\end{sazetak}
+
+% TODO: Navedite naslov na engleskom jeziku.
+\engtitle{Title}
+\begin{abstract}
+Abstract.
+
+\keywords{Keywords.}
+\end{abstract}
+
+\end{document}

@@ -1,0 +1,28 @@
+\section{Duboke neuronske mreže}
+U strojnom učenju mnogi se zadatci mogu formulirati kao mapiranje ulaza na "dobar" izlaz, gdje "dobrotu" izlaza modela možemo, primjerice, formulirati kao odstupanje od ciljne vrijednosti ili nekim od zamjenskih tehnika ako naš zadatak nije nadziran. Uzmimo za primjer linearnu regresiju. Ideja je modelirati izlaz kao linearnu kombinaciju elemenata ulaza, odnosno
+\begin{equation*}
+	f(\vec{x}; \vec{w}) = \vec{w}^T\vec{x}
+\end{equation*}
+Da bi naš model bio uspješan, potrebno je da ima dovoljan kapacitet - da bude dovoljno ekspresivan da uspije modelirati i složene veze među ulaznim varijablama. Linearna regresija je vrlo jednostavan model te, posljedično, može modelirati samo linearne veze između ulaza i izlaza. Potencijalno rješenje bi bilo eksplicitno uvesti nelinearne ovisnosti izlaza s ulazom u vidu \textit{baznih funkcija}, označimo ih s $\Phi$. Tada bi izraz za linearnu regresiju postao
+\begin{equation*}
+	f(\vec{x}; \vec{w}) = \vec{w}^T\Phi(\vec{x})
+\end{equation*}
+Tu dolazimo do idućeg izazova - u općem slučaju ne znamo koja vrsta nelinearnosti je potrebna za oblikovanje kvalitetnog modela. Jedno od mogućih rješenja bila bi metoda pokušaja i pogrešaka - isprobati mnoštvo različitih opcija te se odlučiti za najbolju. Ovaj pristup je vremenski zahtjevan, ali i uvjetovan velikim domenskim znanjem. 
+
+Izvrsno bi bilo kad bismo optimizacijskim postupkom istovremeno mogli naučiti model i pronaći odgovarajuću transformaciju ulaza. Srećom, tu na scenu stupaju duboki modeli. Njihova osnovna ideja je aproksimacija složenih ovisnosti između ulaza i izlaza kompozicijom nelinearnih funkcija. Funkcije moraju biti nelinearne u idućem stadiju kompozicije uzimat ćemo i njihovu linearnu kombinaciju, a linearna kombinacija linearnih kombinacija je opet linearna kombinacija, tj. nije postignut nikakav napredak. Takve funkcije nazivamo aktivacijskima. Dakle, neuronska bi se mreža mogla prikazati na sljedeći način:
+\begin{equation*}
+	h = \sigma(\vec{w}_1^T\sigma(\vec{w}_2^T\sigma(...))),
+\end{equation*}
+gdje je $\sigma$ aktivacijska funkcija. Jednu funkciju $f_k = \sigma(\vec{w}_k^T\Phi_k(\vec{x}))$ u kompoziciji nazivamo jednim slojem. Bitno je napomenuti i da se aktivacijske funkcija između dva sloja mogu razlikovati. Danas, postoji mnogo različitih vrsta slojeva - konvolucijskih, slojeva s povratnom vezom, potpuno povezanih - koji su razvijeni za neki od tipičnih zadataka strojnog učenja kao što je klasifikacija slika, a mogu se proizvoljno kombinirati i prilagođavati zadatcima prema potrebi. Možemo zamijetiti da ova familija modela raspolaže mogućnostima za oblikovanje vrlo ekspresivnih modela na lako proširiv način.
+
+Međutim, da bismo mogli postići ovakav ishod, morali smo i žrtvovati određene kvalitete manje ekspresivnih modela. Jedna od kvaliteta je konveksnost optimizacijskog problema. Prije nego smo prešli na kompoziciju nelinearnih funkcija, raspolagali smo s modelom gdje je pronalazak optimalnih parametara bio konveksan problem. Preciznije, optimirali smo funkciju koja ima jedan lokalni minimum, koji je ujedno i globalni te smo mogli primijeniti neku od tehnika konveksne optimizacije da bismo pronašli rješenje. S druge strane, optimizacijski problem treniranja neuronskih mreža nije konveksan - sadrži mnoštvo lokalnih optimuma te zbog toga ne postoji garancija konvergencije u globalni optimum. Zato pribjegavamo algoritmu gradijentnog spusta.
+
+Gradijentan spust je optimizacijski algoritam primjenjiv na široku klasu funkcija - jedini je uvjet da su derivabilne u svakoj točki, što vrijedi za uobičajeno korištene funkcije gubitka. Ukratko objasnimo osnovnu ideju iza algoritma. Pretpostavimo da funkciji više varijabli odredimo gradijent u nekoj točki. Dobiveni vektor pokazuje smjer porasta funkcije iz te točke. Budući da želimo minimizirati funkciju gubitka, nakon što pronađemo gradijent u toj točki, kretat ćemo se u suprotnom smjeru za mali iznos, što modeliramom stopom učenja. 
+
+Problem kod ovog pristupa je, da bismo pronašli stvarni gradijent funkcije gubitka, moramo odrediti njezinu vrijednost u svakoj točki skupa za treniranje. Međutim, možemo pokušati izbjeći ovaj problem tako što ćemo pokušati procijeniti gradijent. Uobičajena modifikacija kojom ovo radimo jest podjela skupa podataka za treniranje u minigrupe. Nakon što odredimo funkciju gubitka za primjere iz minigrupe, procjenjujemo gradijent uzimajući prosjek gradijenata na primjerima iz minigrupe te ovaj rezultat koristimo u optimizaciji. Dakle, petlja kojom ažuriramo vrijednosti parametara neuronske mreže ima sljedeće korake:
+\begin{enumerate}
+	\item uzorkuj minigrupu iz skupa za treniranje
+	\item odredi procjenu gradijenta kao $\vec{g} = \frac{1}{m}\nabla_{\vec{\theta}}\sum_i L(h(\vec{x_i}; \vec{\theta}))$, gdje je $m$ veličina minigrupe, $\vec{\theta}$ parametri modela, $h$ definicija modela, a $L$ funkcija gubitka,
+	\item ažuriraj parametre: $\vec{\theta} \leftarrow \vec{\theta} - \epsilon\vec{g}$, gdje je $\epsilon$ stopa učenja.
+\end{enumerate}
+Ove korake ponavljamo do ispunjenja nekog od uvjeta zaustavljanja, na primjer broja ažuriranja. U praksi koristimo nadogradnje s adaptivnom stopom učenja koje pospješuju stabilnost treniranja, kao što je Adam \todo{ref adam} ili RMSProp \todo{ref rmsprop}, ali njihovi implementacijski detalji nisu u fokusu ovoga rada.
