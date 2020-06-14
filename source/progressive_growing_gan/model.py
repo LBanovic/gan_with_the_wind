@@ -108,7 +108,6 @@ def discriminator(resolution):
             if self.resolution > 2:
                 y = getattr(self, f'db_{self.resolution}')(y)
                 if not np.isclose(alpha, 1.0):
-                    # TODO deduce what is wrong
                     x = self.help_downscale(x)
                     x = getattr(self, f'layer_in_{self.resolution - 1}')(x)
                     x = (1 - alpha) * x + alpha * y
