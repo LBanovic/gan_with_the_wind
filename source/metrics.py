@@ -61,6 +61,8 @@ if __name__ == '__main__':
         res = int(model_dir.split('x')[0])
         directory = os.path.join(models_dir, model_dir)
         print('ready')
+        print(directory)
+        import pdb; pdb.set_trace()
         gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
         gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
