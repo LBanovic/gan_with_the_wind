@@ -1,7 +1,7 @@
 while :
 do
-  git add . > /dev/null
-  git commit -m "intermediate" > /dev/null
-  git push origin master > /dev/null
+  git add . > /dev/null 2>&1
+  git commit -m "intermediate" > /dev/null 2>&1
+  git push origin master > /dev/null 2>&1
 	sleep 900
 done
