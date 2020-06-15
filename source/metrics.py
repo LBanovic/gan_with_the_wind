@@ -18,12 +18,8 @@ def FID(model, dataset, shape=(128, 128, 3)):
 
     for real, noise in dataset:
         fake = model.generate(noise)
-        fake = fake * 127.5 + 127.5
-        real = real * 127.5 + 127.5
         fake = np.array(list(scale(fake, shape)))
         real = np.array(list(scale(real, shape)))
-        fake = preprocess_input(fake)
-        real = preprocess_input(real)
         feat_real = inception.predict(real)
         feat_fake = inception.predict(fake)
         feat_fakes.extend(feat_fake)
