@@ -23,6 +23,8 @@ def FID(model, dataset, shape=(128, 128, 3)):
         images_fake.extend(scale(fake, shape))
         images_real.extend(scale(real, shape))
 
+    images_real = np.array(images_real)
+    images_fake = np.array(images_fake)
     images_fake = preprocess_input(images_fake)
     images_real = preprocess_input(images_real)
     feat_real = inception.predict(images_real)
