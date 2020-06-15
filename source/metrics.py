@@ -61,6 +61,7 @@ if __name__ == '__main__':
 
     for model_dir in os.listdir(models_dir):
         res = int(int(model_dir.split('x')[0]) ** 0.5)
+        print(res)
         directory = os.path.join(models_dir, model_dir)
         gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
