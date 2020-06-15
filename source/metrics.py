@@ -13,25 +13,25 @@ def scale(images, shape):
 
 
 def FID(model, dataset, shape=(128, 128, 3)):
-    images_fake = []
-    images_real = []
+    feat_fakes = []
+    feat_reals = []
 
     for real, noise in dataset:
         fake = model.generate(noise)
         fake = fake * 127.5 + 127.5
         real = real * 127.5 + 127.5
-        images_fake.extend(scale(fake, shape))
-        images_real.extend(scale(real, shape))
-
-    images_real = np.array(images_real)
-    images_fake = np.array(images_fake)
-    images_fake = preprocess_input(images_fake)
-    images_real = preprocess_input(images_real)
-    print('HERE')
-    feat_real = inception.predict(images_real)
-    feat_fake = inception.predict(images_fake)
-    mean_real, mean_fake = feat_real.mean(axis=0), feat_fake.mean(axis=0)
-    cov_real, cov_fake = np.cov(feat_real, rowvar=False), np.cov(feat_fake, rowvar=False)
+        fake = scale(fake, shape)
+        real = scale(real, shape)
+        fake = preprocess_input(fake)
+        real = preprocess_input(real)
+        feat_real = inception.predict(real)
+        feat_fake = inception.predict(fake)
+        feat_fakes.extend(feat_fake)
+        feat_reals.extend(feat_real)
+    feat_fakes = np.array(feat_fakes)
+    feat_reals = np.array(feat_reals)
+    mean_real, mean_fake = feat_reals.mean(axis=0), feat_fakes.mean(axis=0)
+    cov_real, cov_fake = np.cov(feat_reals, rowvar=False), np.cov(feat_fakes, rowvar=False)
 
     fid = (mean_fake - mean_real) ** 2 + np.trace(cov_real + cov_fake - 2 * scipy.linalg.sqrtm(cov_real @ cov_fake + 1e-10))
     return fid
