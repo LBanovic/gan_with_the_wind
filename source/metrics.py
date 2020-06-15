@@ -1,4 +1,4 @@
-from tensorflow.keras.applications.inception_v3 import preprocess_input
+from tensorflow.keras.applications.inception_v3 import preprocess_input, InceptionV3
 from load_data.dataset_loader import CelebALoader
 from skimage.transform import resize
 import scipy
