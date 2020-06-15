@@ -1,4 +1,4 @@
-from tensorflow.keras.applications.inception_v3 import InceptionV3, preprocess_input
+from tensorflow.keras.applications.inception_v3 import preprocess_input
 from load_data.dataset_loader import CelebALoader
 from skimage.transform import resize
 import scipy
@@ -63,6 +63,7 @@ if __name__ == '__main__':
         gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
         gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
+        print('ready')
         for epoch in os.listdir(directory):
             loader = CelebALoader(celeba_loc, res)
             train_ds, test_ds = loader.load(128, input_dim)
