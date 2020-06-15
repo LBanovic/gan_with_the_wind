@@ -26,6 +26,7 @@ def FID(model, dataset, shape=(128, 128, 3)):
         feat_reals.extend(feat_real)
     feat_fakes = np.array(feat_fakes)
     feat_reals = np.array(feat_reals)
+    import pdb; pdb.set_trace()
     mean_real, mean_fake = feat_reals.mean(axis=0), feat_fakes.mean(axis=0)
     cov_real, cov_fake = np.cov(feat_reals, rowvar=False), np.cov(feat_fakes, rowvar=False)
 
