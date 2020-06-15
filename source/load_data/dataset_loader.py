@@ -56,8 +56,6 @@ class CelebALoader(Loader):
 
         test_ds = dataset.skip(self.train_set_size).map(self._tfrecord_parse,
                                                         num_parallel_calls=tf.data.experimental.AUTOTUNE)
-        if self.resolution <= 5:
-            test_ds = test_ds.cache()
         test_ds = test_ds.batch(batch_size, drop_remainder=True).prefetch(1000)
 
         return tf.data.Dataset.zip((train_ds, noise_ds)), tf.data.Dataset.zip((test_ds, noise_ds))
