@@ -60,10 +60,10 @@ if __name__ == '__main__':
     for model_dir in os.listdir(models_dir):
         res = int(model_dir.split('x')[0])
         directory = os.path.join(models_dir, model_dir)
+        print('ready')
         gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
         gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
-        print('ready')
         for epoch in os.listdir(directory):
             loader = CelebALoader(celeba_loc, res)
             train_ds, test_ds = loader.load(128, input_dim)
