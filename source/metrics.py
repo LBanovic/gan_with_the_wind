@@ -5,7 +5,7 @@ import scipy
 import numpy as np
 import os
 
-# inception = InceptionV3(include_top=False, pooling='avg', input_shape=(128, 128, 3))
+inception = InceptionV3(include_top=False, pooling='avg', input_shape=(128, 128, 3))
 
 def scale(images, shape):
     for image in images:
@@ -61,7 +61,6 @@ if __name__ == '__main__':
         res = int(int(model_dir.split('x')[0]) ** 0.5)
         directory = os.path.join(models_dir, model_dir)
         gan = model.sndcgan(directory, res, input_channels, input_dim, 0, 0)
-        import pdb; pdb.set_trace()
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
         gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
         for epoch in os.listdir(directory):
@@ -73,15 +72,16 @@ if __name__ == '__main__':
                     os.mkdir(imdir)
                 epoch = epoch[:-len('_epoch')]
                 gan.restore_from_checkpoint(directory, epoch)
-                for i, (_, noise) in enumerate(test_ds):
-                    images = gan.generate(noise)
-                    images = images * 127.5 + 127.5
-                    images = np.rint(images).clip(0, 255).astype(np.uint8)
-                    for j, image in enumerate(images):
-                        im = Image.fromarray(image)
-                        im.save(f'{imdir}/{i}_{j}.png')
-                # fid = FID(gan, test_ds)
-                # results.append(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
+                # for i, (_, noise) in enumerate(test_ds):
+                #     images = gan.generate(noise)
+                #     images = images * 127.5 + 127.5
+                #     images = np.rint(images).clip(0, 255).astype(np.uint8)
+                #     for j, image in enumerate(images):
+                #         im = Image.fromarray(image)
+                #         im.save(f'{imdir}/{i}_{j}.png')
+                fid = FID(gan, test_ds)
+                results.append(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
+                print(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
         del gan
-    # with open(f'{models_dir}.json') as dirjson:
-    #     json.dump(results, dirjson)
+    with open(f'{models_dir}.json') as dirjson:
+        json.dump(results, dirjson)
