@@ -27,6 +27,7 @@ def FID(model, dataset, shape=(128, 128, 3)):
     images_fake = np.array(images_fake)
     images_fake = preprocess_input(images_fake)
     images_real = preprocess_input(images_real)
+    print('HERE')
     feat_real = inception.predict(images_real)
     feat_fake = inception.predict(images_fake)
     mean_real, mean_fake = feat_real.mean(axis=0), feat_fake.mean(axis=0)
