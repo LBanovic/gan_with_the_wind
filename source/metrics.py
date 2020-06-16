@@ -4,9 +4,8 @@ from skimage.transform import resize
 import scipy
 import numpy as np
 import os
-import fid as fidcalc
 
-# inception = InceptionV3(include_top=False, pooling='avg', input_shape=(128, 128, 3))
+inception = InceptionV3(include_top=False, pooling='avg', input_shape=(128, 128, 3))
 
 def scale(images, shape):
     for image in images:
@@ -32,22 +31,6 @@ def FID(model, dataset, shape=(128, 128, 3)):
 
     fid = np.linalg.norm(mean_fake - mean_real, ord=2) ** 2 + np.trace(cov_real + cov_fake - 2 * scipy.linalg.sqrtm(cov_real @ cov_fake + 1e-10))
     assert np.isscalar(fid)
-    return fid
-
-def FID_other(model, dataset):
-    reals = []
-    fakes = []
-    for real, noise in dataset:
-        real = (real * 127.5 + 127.5).astype(np.uint8)
-        real = np.transpose(real, (0, 3, 1, 2))
-        fake = model.generate(noise)
-        fake = (fake * 127.5 + 127.5).astype(np.uint8)
-        fake = np.transpose(fake, (0, 3, 1, 2))
-        reals.extend(real)
-        fakes.extend(fake)
-    reals = np.array(reals)
-    fakes = np.array(fakes)
-    fid = fidcalc.get_fid(reals, fakes)
     return fid
 
 

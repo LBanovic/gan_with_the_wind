@@ -14,7 +14,7 @@ from progressive_growing_gan import model
 from visualize_data import visualize
 
 from load_data.dataset_loader import MnistLoader
-# from metrics import FID_other
+# from metrics import FID
 
 model_dir = sys.argv[1]
 # run params
