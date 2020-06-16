@@ -46,7 +46,6 @@ class WeightScaleConv(layers.Layer):
         kernel_shape = [self.kernel_size, self.kernel_size, input_shape.as_list()[-1], self.filters]
         self.w = self.add_weight(name='kernel', shape=kernel_shape, trainable=True,
                                  initializer='random_normal', dtype='float32')
-        import pdb; pdb.set_trace()
         self.scale = tf.constant(self.gain / np.sqrt(np.prod(kernel_shape[:-1])), dtype='float32')
 
     def call(self, inputs, **kwargs):
