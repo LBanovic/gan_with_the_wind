@@ -10,11 +10,25 @@ lrelu = lambda x: tf.nn.leaky_relu(x, 0.2)
 
 
 # Taken from "Progressive Growing of GANs", https://github.com/tkarras/progressive_growing_of_gans
-def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=512):
+def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=256):
     return min(int(fmap_base / (2.0 ** (res * fmap_decay))), fmap_max)
 
 
 # TODO mydense, myconv
+
+class MappingScale(layers.Layer):
+    def __init__(self, noise_dims, map_depth, **kwargs):
+        super().__init__(**kwargs)
+        self.map_depth = map_depth
+        for i in range(map_depth):
+            setattr(self, f'map_{i}', WeightScaleDense(noise_dims, name=f'mapdense_{i}'))
+
+    def call(self, inputs, **kwargs):
+        x = inputs
+        for i in range(self.map_depth):
+            x = getattr(self, f'map_{i}')(x)
+        return x
+
 
 class WeightScaleConv(layers.Layer):
 
@@ -71,15 +85,20 @@ class BiasApplier(layers.Layer):
 
 class DiscriminatorBlockProgressive(layers.Layer):
 
-    def __init__(self, res, **kwargs):
+    def __init__(self, res, use_sn=False, **kwargs):
         super().__init__(**kwargs)
         self.res = res
+        self.use_sn = use_sn
 
     def build(self, input_shape):
         self.conv_1 = WeightScaleConv(filters=n_filters(self.res - 1), kernel_size=3, name='conv_1')
+        if self.use_sn:
+            self.conv_1 = SpectralNormalization(self.conv_1)
         self.bias_1 = BiasApplier(name='bias_1')
         self.act_1 = layers.Activation(lrelu)
         self.conv_2 = WeightScaleConv(filters=n_filters(self.res - 2), kernel_size=3, name='conv_2')
+        if self.use_sn:
+            self.conv_2 = SpectralNormalization(self.conv_2)
         self.bias_2 = BiasApplier(name='bias_2')
         self.act_2 = layers.Activation(lrelu)
         self.downscale = layers.AveragePooling2D(name='avg_pool')
@@ -120,7 +139,7 @@ class MinibatchStddevLayer(layers.Layer):
 
 class DiscriminatorFinalBlockProgressive(layers.Layer):
     # res = 4x4
-    def __init__(self, group_size, res, **kwargs):
+    def __init__(self, group_size, res, use_sn=False, **kwargs):
         super().__init__(**kwargs)
         self.group_size = group_size
         self.res = res
@@ -128,12 +147,18 @@ class DiscriminatorFinalBlockProgressive(layers.Layer):
     def build(self, input_shape):
         self.mbstddev = MinibatchStddevLayer(self.group_size)
         self.conv_1 = WeightScaleConv(filters=n_filters(self.res - 1), kernel_size=3, name='conv_1')
+        if self.use_sn:
+            self.conv_1 = SpectralNormalization(self.conv_1)
         self.bias_1 = BiasApplier(name='bias_1')
         self.act_1 = layers.Activation(lrelu)
         self.dense_1 = WeightScaleDense(n_filters(self.res - 2), name='dense_1')
+        if self.use_sn:
+            self.dense_1 = SpectralNormalization(self.dense_1)
         self.bias_2 = BiasApplier(name='bias_2')
         self.act_2 = layers.Activation(lrelu)
         self.dense_2 = WeightScaleDense(1, name='dense_2', gain=1)
+        if self.use_sn:
+            self.dense_2 = SpectralNormalization(self.dense_2)
         self.bias_3 = BiasApplier(name='bias_3')
 
     def call(self, x, **kwargs):
@@ -146,12 +171,15 @@ class DiscriminatorFinalBlockProgressive(layers.Layer):
 
 class FromRGB(layers.Layer):
 
-    def __init__(self, res, **kwargs):
+    def __init__(self, res, use_sn=False, **kwargs):
         super().__init__(**kwargs)
         self.res = res
+        self.use_sn = use_sn
 
     def build(self, input_shape):
         self.conv = WeightScaleConv(filters=n_filters(self.res - 1), kernel_size=1, name='conv')
+        if self.use_sn:
+            self.conv = SpectralNormalization(self.conv)
         self.bias = BiasApplier(name='bias')
         self.act = layers.Activation(lrelu)
 
