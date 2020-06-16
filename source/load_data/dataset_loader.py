@@ -79,7 +79,7 @@ class MnistLoader(Loader):
         train_images = self._resize(train_images)
         train_images = (train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 
-        train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(10000).batch(batch_size).prefetch(100)
+        train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(10000).batch(batch_size, drop_remainder=True).prefetch(100)
 
         noise_dataset = tf.data.Dataset.from_tensors(0).repeat()
         noise_dataset = noise_dataset.map(lambda _: tf.random.normal([batch_size, noise_dims]))
@@ -90,7 +90,7 @@ class MnistLoader(Loader):
         test_images = self._resize(test_images)
         test_images = (test_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 
-        test_dataset = tf.data.Dataset.from_tensor_slices(test_images).shuffle(10000).batch(batch_size).prefetch(100)
+        test_dataset = tf.data.Dataset.from_tensor_slices(test_images).shuffle(10000).batch(batch_size,drop_remainder=True).prefetch(100)
 
         noise_dataset_test = tf.data.Dataset.from_tensors(0).repeat()
         noise_dataset_test = noise_dataset_test.map(lambda _: tf.random.normal([batch_size, noise_dims]))
