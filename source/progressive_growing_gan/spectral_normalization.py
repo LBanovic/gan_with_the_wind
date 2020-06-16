@@ -15,7 +15,7 @@ class SpectralNormalization(tf.keras.layers.Wrapper):
                                    initializer=tf.keras.initializers.TruncatedNormal(stddev=0.02),
                                    trainable=False,
                                    name='sn_u')
-        super().build()
+        # super().build()
 
     def call(self, inputs, training=None):
         if training:
