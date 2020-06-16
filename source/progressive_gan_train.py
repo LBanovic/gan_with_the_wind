@@ -22,15 +22,15 @@ celeba_loc = sys.argv[2]
 # run params
 start_res = 2
 
-stabilize_epochs = 4
-learn_epochs = 4
+stabilize_epochs = 1
+learn_epochs = 1
 input_dim = 512
 input_channels = 3
 maxres = 6
 restore_from_epoch = 7
 
 batch_size = 64
-train_set_size = 200_000
+train_set_size = 10_000
 test_for_fid = 10_000
 
 g_lr = 0.001

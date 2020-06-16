@@ -28,9 +28,10 @@ def FID(model, dataset, shape=(128, 128, 3)):
     feat_reals = np.array(feat_reals)
     mean_real, mean_fake = feat_reals.mean(axis=0), feat_fakes.mean(axis=0)
     cov_real, cov_fake = np.cov(feat_reals, rowvar=False), np.cov(feat_fakes, rowvar=False)
-
-    fid = np.linalg.norm(mean_fake - mean_real, ord=2) ** 2 + np.trace(cov_real + cov_fake - 2 * scipy.linalg.sqrtm(cov_real @ cov_fake + 1e-10))
-    assert np.isscalar(fid)
+    cov_mean = scipy.linalg.sqrtm(cov_real @ cov_fake + 1e-10)
+    if np.iscomplexobj(cov_mean):
+        cov_mean = cov_mean.real
+    fid = np.sum((mean_fake - mean_real)**2) + np.trace(cov_real + cov_fake - 2 * cov_mean)
     return fid
 
 
