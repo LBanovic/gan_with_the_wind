@@ -21,9 +21,9 @@ model_dir = sys.argv[1]
 start_res = 2
 maxres = 6
 
-stabilize_epochs = 4
-learn_epochs = 4
-map_depth = 4
+stabilize_epochs = 2
+learn_epochs = 2
+map_depth = 3
 input_dim = 128
 input_channels = 1
 
