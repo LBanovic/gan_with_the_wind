@@ -60,8 +60,7 @@ class WeightScaleDense(layers.Layer):
         self.gain = gain
 
     def build(self, input_shape):
-        import pdb; pdb.set_trace()
-        flatshape = tf.reduce_prod(input_shape[1:])
+        flatshape = np.prod(input_shape[1:].as_list())
         self.reshape = layers.Flatten()
 
         kernel_shape = [flatshape, self.filters]
