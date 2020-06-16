@@ -80,8 +80,8 @@ for res in range(start_res, maxres + 1):
     train_data, test_data = MnistLoader(res).load(batch_size, input_dim)
     print(f'Training on resolution {2 ** res}x{2 ** res}')
     # need to run through just so the model builds
-    gan.generator(np.zeros((batch_size, input_dim)), training=False, alpha=0)
-    gan.discriminator(np.zeros((batch_size, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
+    gan.generator(tf.zeros((batch_size, input_dim)), training=False, alpha=0)
+    gan.discriminator(tf.zeros((batch_size, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
     gan.generator.summary()
     gan.discriminator.summary()
     if res > 2:
