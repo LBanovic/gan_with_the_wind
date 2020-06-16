@@ -2,7 +2,7 @@ import abc
 import os
 import tensorflow as tf
 import numpy as np
-
+import cv2
 
 class Loader(abc.ABC):
 
@@ -63,11 +63,20 @@ class CelebALoader(Loader):
 
 class MnistLoader(Loader):
 
+    def __init__(self, res):
+        self.res = res
+
+    def _resize(self, images):
+        factor = 32 // 2 ** self.res
+        smaller = images.reshape((-1, 2 ** self.res, factor, 2 ** self.res, factor, 1)).max(4).max(2)
+        return smaller
+
     def load(self, batch_size, noise_dims):
-        (train_images, _), (_, _) = tf.keras.datasets.mnist.load_data()
+        (train_images, _), (test_images, _) = tf.keras.datasets.mnist.load_data()
         train_images = np.pad(train_images, (2, 2), mode='edge')[2:-2]  # get to 32x32
         train_images = train_images.reshape(train_images.shape[0], 32, 32, 1).astype('float32')
         assert train_images.shape[1:] == (32, 32, 1), f'{train_images.shape}'
+        train_images = self._resize(train_images)
         train_images = (train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 
         train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(10000).batch(batch_size).prefetch(100)
@@ -75,4 +84,15 @@ class MnistLoader(Loader):
         noise_dataset = tf.data.Dataset.from_tensors(0).repeat()
         noise_dataset = noise_dataset.map(lambda _: tf.random.normal([batch_size, noise_dims]))
 
-        return tf.data.Dataset.zip((train_dataset, noise_dataset)), (32, 32, 1)
+        test_images = np.pad(test_images, (2, 2), mode='edge')[2:-2]  # get to 32x32
+        test_images = test_images.reshape(test_images.shape[0], 32, 32, 1).astype('float32')
+        assert test_images.shape[1:] == (32, 32, 1), f'{test_images.shape}'
+        test_images = self._resize(test_images)
+        test_images = (test_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
+
+        test_dataset = tf.data.Dataset.from_tensor_slices(test_images).shuffle(10000).batch(batch_size).prefetch(100)
+
+        noise_dataset_test = tf.data.Dataset.from_tensors(0).repeat()
+        noise_dataset_test = noise_dataset_test.map(lambda _: tf.random.normal([batch_size, noise_dims]))
+
+        return tf.data.Dataset.zip((train_dataset, noise_dataset)), tf.data.Dataset.zip((test_dataset, noise_dataset_test))
