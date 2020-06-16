@@ -111,10 +111,12 @@ def discriminator(resolution):
 
 
 def sndcgan(model_dir, resolution, channels, input_dims, g_lr, d_lr):
-    generator_optimizer = tf.keras.optimizers.Adam(g_lr,
+    g_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(g_lr, 100_000, 0.999)
+    d_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(d_lr, 100_000, 0.999)
+    generator_optimizer = tf.keras.optimizers.Adam(g_lr_schedule,
                                                    beta_1=pc.adam_beta1,
                                                    beta_2=pc.adam_beta2)
-    discriminator_optimizer = tf.keras.optimizers.Adam(d_lr,
+    discriminator_optimizer = tf.keras.optimizers.Adam(d_lr_schedule,
                                                        beta_1=pc.adam_beta1,
                                                        beta_2=pc.adam_beta2)
 

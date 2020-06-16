@@ -17,7 +17,7 @@ from load_data.dataset_loader import CelebALoader
 model_dir = sys.argv[1]
 celeba_loc = sys.argv[2]
 # run params
-start_res = 6
+start_res = 2
 
 stabilize_epochs = 4
 learn_epochs = 4
@@ -26,7 +26,7 @@ input_channels = 3
 maxres = 6
 restore_from_epoch = 7
 
-batch_size = 16
+batch_size = 64
 train_set_size = 200_000
 
 
@@ -57,34 +57,12 @@ def save_images(savedir, epoch, predictions):
     plt.savefig(f'{savedir}/images/image_at_epoch_{epoch:04d}.png')
     plt.close()
 
-
-log_file = f'{model_dir}/log.txt'
-
-def log(res, epoch, gen_loss, disc_loss):
-    with open(log_file, 'a') as logger:
-        line = f'Epoch {epoch}, resolution {2 ** res}x{2 ** res}: gen_loss={gen_loss}, disc_loss={disc_loss}\n'
-        logger.write(line)
-
-
-def epoch_cleanup(gan, epoch, res, savedir, seed, test_data=None):
+def epoch_cleanup(gan, epoch, savedir, seed):
     gan.make_checkpoint(epoch)
     save_images(savedir, epoch, gan.generate(seed))
-    gen_loss, disc_loss = 0, 0
-    if test_data:
-        for i, (image, noise) in enumerate(test_data):
-            gen_loss_batch, disc_loss_batch = gan.get_losses(image, noise, training=False)
-            gen_loss += gen_loss_batch
-            disc_loss += disc_loss_batch
-        gen_loss, disc_loss = gen_loss / (i + 1) / batch_size, disc_loss / (i + 1) / batch_size
-        log(res, epoch, gen_loss, disc_loss)
-
 
 num_showcase_imgs = 16
 seed = tf.random.normal([num_showcase_imgs, input_dim])
-
-# if len(os.listdir(model_dir)) != 0:
-#    print('Model directory must be empty. Exiting.')
-#    exit()
 
 overall_epoch = 0
 for res in range(start_res, maxres + 1):
@@ -118,7 +96,7 @@ for res in range(start_res, maxres + 1):
                     start = t
                 alpha = get_alpha(batch_index=j + 1, batch_epoch=i)
                 gan.train_on_batch(image, noise, alpha=alpha)
-            epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
+            epoch_cleanup(gan, overall_epoch, res, savedir)
             overall_epoch += 1
 
     print('Learning phase.')
@@ -130,5 +108,5 @@ for res in range(start_res, maxres + 1):
                 print(f"{j * batch_size} images shown during learning in {t - start} s.")
                 start = t
             gan.train_on_batch(image, noise)
-        epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
+        epoch_cleanup(gan, overall_epoch, savedir, seed)
         overall_epoch += 1
