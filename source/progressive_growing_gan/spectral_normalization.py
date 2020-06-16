@@ -8,7 +8,6 @@ class SpectralNormalization(tf.keras.layers.Wrapper):
     def build(self, input_shape=None):
         if not self.layer.built:
             self.layer.build(input_shape)
-        import pdb; pdb.set_trace()
         self.w = self.layer.kernel
         self.w_shape = self.w.shape.as_list()
         self.u = self.add_weight(shape=(self.w_shape[0], 1),
