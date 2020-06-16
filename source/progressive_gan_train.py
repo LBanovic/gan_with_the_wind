@@ -69,7 +69,6 @@ seed = tf.random.normal([num_showcase_imgs, input_dim])
 
 overall_epoch = 0
 for res in range(start_res, maxres + 1):
-    tf.keras.backend.clear_session()
     savedir = get_savedir(res)
     gan = model.sndcgan(savedir, res, input_channels, input_dim, g_lr, d_lr)
     train_data, test_data = CelebALoader(celeba_loc, res, train_set_size=train_set_size).load(batch_size, input_dim)
@@ -127,4 +126,8 @@ for res in range(start_res, maxres + 1):
 
     minfid, restore_from_epoch = min(results, key=lambda k: k[0])
 
-    del train_data, test_data
+    del gan.generator
+    del gan.discriminator
+    del gan
+    del test_data
+    del train_data
