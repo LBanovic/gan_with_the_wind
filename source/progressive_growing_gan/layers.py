@@ -149,6 +149,7 @@ class DiscriminatorFinalBlockProgressive(layers.Layer):
         super().__init__(**kwargs)
         self.group_size = group_size
         self.res = res
+        self.use_sn = use_sn
 
     def build(self, input_shape):
         self.mbstddev = MinibatchStddevLayer(self.group_size)
