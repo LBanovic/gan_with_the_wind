@@ -56,6 +56,8 @@ if __name__ == '__main__':
 
     results = []
 
+    loader = CelebALoader(celeba_loc, 6)
+    train_ds, test_ds = loader.load(64, input_dim)
     for model_dir in os.listdir(models_dir):
         res = int(np.log2(int(model_dir.split('x')[0])))
         print(res)
@@ -64,8 +66,6 @@ if __name__ == '__main__':
         gan.generator(np.zeros((64, input_dim)), training=False, alpha=0)
         gan.discriminator(np.zeros((64, 2 ** res, 2 ** res, input_channels)), training=False, alpha=0)
         for epoch in os.listdir(directory):
-            loader = CelebALoader(celeba_loc, res)
-            train_ds, test_ds = loader.load(64, input_dim)
             if epoch != 'images':
                 imdir = f'{res}_{epoch}_images'
                 if not os.path.exists(imdir):
