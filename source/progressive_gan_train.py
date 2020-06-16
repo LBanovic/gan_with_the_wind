@@ -30,8 +30,8 @@ maxres = 6
 restore_from_epoch = 7
 
 batch_size = 64
-train_set_size = 10000
-test_for_fid = 4000 // batch_size
+train_set_size = 200_000
+test_for_fid = 10_000 // batch_size
 
 g_lr = 0.001
 d_lr = 0.001
