@@ -43,7 +43,7 @@ class WeightScaleConv(layers.Layer):
         self.kernel_size = kernel_size
 
     def build(self, input_shape):
-        kernel_shape = [self.kernel_size, self.kernel_size, input_shape[-1], self.filters]
+        kernel_shape = [self.kernel_size, self.kernel_size, input_shape.as_list()[-1], self.filters]
         self.w = self.add_weight(name='kernel', shape=kernel_shape, trainable=True,
                                  initializer='random_normal', dtype='float32')
         import pdb; pdb.set_trace()
