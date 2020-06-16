@@ -71,7 +71,7 @@ best_fid = np.inf
 patience = 3
 waiting = 0
 
-_, test_data = MnistLoader(5).load(batch_size, input_dim)
+# _, test_data = MnistLoader(5).load(batch_size, input_dim)
 
 for res in range(start_res, maxres + 1):
     tf.keras.backend.clear_session()

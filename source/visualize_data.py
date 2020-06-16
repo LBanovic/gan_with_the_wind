@@ -20,7 +20,7 @@ def visualize(imgs):
 
 
 if __name__ == "__main__":
-    train, test = MnistLoader().load(batch_size=16, noise_dims=128)
+    train, test = MnistLoader(2).load(batch_size=16, noise_dims=128)
     imgs, noise = next(iter(train))
     visualize(imgs)
     plt.show()
