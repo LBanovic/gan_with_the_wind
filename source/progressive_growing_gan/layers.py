@@ -29,8 +29,9 @@ class MappingScale(layers.Layer):
 
     def call(self, inputs, **kwargs):
         x = inputs
-        import pdb; pdb.set_trace()
         for i in range(self.map_depth):
+            import pdb;
+            pdb.set_trace()
             x = getattr(self, f'map_{i}')(x)
         return x
 
