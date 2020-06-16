@@ -100,7 +100,7 @@ for res in range(start_res, maxres + 1):
                 alpha = get_alpha(batch_index=j + 1, batch_epoch=i)
                 gan.train_on_batch(image, noise, alpha=alpha)
             print('Epoch done.')
-            epoch_cleanup(gan, overall_epoch, res, savedir)
+            epoch_cleanup(gan, overall_epoch, savedir, seed)
             overall_epoch += 1
 
     print('Learning phase.')
@@ -128,3 +128,5 @@ for res in range(start_res, maxres + 1):
         json.dump(results, jsondump)
 
     minfid, restore_from_epoch = min(results, key=lambda k: k[0])
+    del train_data
+    del test_data
