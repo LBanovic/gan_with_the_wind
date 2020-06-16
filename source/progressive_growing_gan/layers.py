@@ -10,7 +10,7 @@ lrelu = lambda x: tf.nn.leaky_relu(x, 0.2)
 
 
 # Taken from "Progressive Growing of GANs", https://github.com/tkarras/progressive_growing_of_gans
-def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=256):
+def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=64):
     return min(int(fmap_base / (2.0 ** (res * fmap_decay))), fmap_max)
 
 
@@ -43,7 +43,7 @@ class WeightScaleConv(layers.Layer):
         self.kernel_size = kernel_size
 
     def build(self, input_shape):
-        kernel_shape = [self.kernel_size, self.kernel_size, input_shape.as_list()[-1], self.filters]
+        kernel_shape = [self.kernel_size, self.kernel_size, input_shape[-1], self.filters]
         self.w = self.add_weight(name='kernel', shape=kernel_shape, trainable=True,
                                  initializer='random_normal', dtype='float32')
         self.kernel = self.w
@@ -61,7 +61,7 @@ class WeightScaleDense(layers.Layer):
         self.gain = gain
 
     def build(self, input_shape):
-        flatshape = np.prod(input_shape.as_list()[1:])
+        flatshape = np.prod(input_shape[1:])
         self.reshape = layers.Flatten()
 
         kernel_shape = [flatshape, self.filters]

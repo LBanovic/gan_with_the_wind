@@ -14,7 +14,7 @@ from progressive_growing_gan import model
 from visualize_data import visualize
 
 from load_data.dataset_loader import MnistLoader
-from metrics import FID_other
+# from metrics import FID_other
 
 model_dir = sys.argv[1]
 # run params
@@ -102,16 +102,16 @@ for res in range(start_res, maxres + 1):
                     t = time.time()
                     print(f"{j * batch_size} images shown during stabilization in {t - start} s.")
                     start = t
-                    fid = FID_other(gan, test_data)
-                    if fid < best_fid:
-                        print('Saved best FID', fid)
-                        epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
-                        best_fid = fid
-                        waiting = 0
-                    elif fid > best_fid:
-                        waiting += 1
-                        if waiting == patience:
-                            break
+                    # fid = FID_other(gan, test_data)
+                    # if fid < best_fid:
+                    #     print('Saved best FID', fid)
+                    #     epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
+                    #     best_fid = fid
+                    #     waiting = 0
+                    # elif fid > best_fid:
+                    #     waiting += 1
+                    #     if waiting == patience:
+                    #         break
                 alpha = get_alpha(batch_index=j + 1, batch_epoch=i)
                 gan.train_on_batch(image, noise, alpha=alpha)
             if waiting == patience:
@@ -127,16 +127,16 @@ for res in range(start_res, maxres + 1):
                 t = time.time()
                 print(f"{j * batch_size} images shown during learning in {t - start} s.")
                 start = t
-                fid = FID_other(gan, test_data)
-                if fid < best_fid:
-                    print('Saved best FID:', fid)
-                    epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
-                    best_fid = fid
-                    waiting = 0
-                elif fid > best_fid:
-                    waiting += 1
-                    if waiting == patience:
-                        break
+                # fid = FID_other(gan, test_data)
+                # if fid < best_fid:
+                #     print('Saved best FID:', fid)
+                #     epoch_cleanup(gan, overall_epoch, res, savedir, seed, test_data=None)
+                #     best_fid = fid
+                #     waiting = 0
+                # elif fid > best_fid:
+                #     waiting += 1
+                #     if waiting == patience:
+                #         break
             gan.train_on_batch(image, noise)
         if waiting == patience:
             break
