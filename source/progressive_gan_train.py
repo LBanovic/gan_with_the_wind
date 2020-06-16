@@ -31,7 +31,7 @@ restore_from_epoch = 7
 
 batch_size = 64
 train_set_size = 10000
-test_for_fid = 10_000 // batch_size
+test_for_fid = 4000 // batch_size
 
 g_lr = 0.001
 d_lr = 0.001
@@ -128,6 +128,3 @@ for res in range(start_res, maxres + 1):
         json.dump(results, jsondump)
 
     minfid, restore_from_epoch = min(results, key=lambda k: k[0])
-
-    del test_data
-    del train_data
