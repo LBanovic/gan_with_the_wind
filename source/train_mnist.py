@@ -21,13 +21,13 @@ model_dir = sys.argv[1]
 start_res = 2
 maxres = 6
 
-stabilize_epochs = 2
-learn_epochs = 2
-map_depth = 3
+stabilize_epochs = 4
+learn_epochs = 4
+map_depth = 0
 input_dim = 128
 input_channels = 1
 
-batch_size = 64
+batch_size = 256
 train_set_size = 60_000
 
 g_lr = 0.001

@@ -10,7 +10,7 @@ lrelu = lambda x: tf.nn.leaky_relu(x, 0.2)
 
 
 # Taken from "Progressive Growing of GANs", https://github.com/tkarras/progressive_growing_of_gans
-def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=64):
+def n_filters(res, fmap_base=8192, fmap_decay=1.0, fmap_max=512):
     return min(int(fmap_base / (2.0 ** (res * fmap_decay))), fmap_max)
 
 

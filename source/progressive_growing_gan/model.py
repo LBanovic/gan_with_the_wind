@@ -185,17 +185,17 @@ def discriminator_mnist(resolution):
             super().__init__(model_string='discriminator', *args, **kwargs)
             self.resolution = resolution
 
-            setattr(self, f'layer_in_{resolution}', FromRGB(resolution, use_sn=True, name=f'input_{resolution}'))
+            setattr(self, f'layer_in_{resolution}', FromRGB(resolution, use_sn=False, name=f'input_{resolution}'))
             if resolution > 2:
-                setattr(self, f'layer_in_{resolution - 1}', FromRGB(resolution - 1, use_sn=True, name=f'input_{resolution - 1}'))
+                setattr(self, f'layer_in_{resolution - 1}', FromRGB(resolution - 1, use_sn=False, name=f'input_{resolution - 1}'))
 
             if resolution > 2:
                 self.help_downscale = layers.AveragePooling2D(name='downscale')
 
             for res in range(resolution, 2, -1):
-                setattr(self, f'db_{res}', DiscriminatorBlockProgressive(res, name=f'disc_block_{res}', use_sn=True))
+                setattr(self, f'db_{res}', DiscriminatorBlockProgressive(res, name=f'disc_block_{res}', use_sn=False))
 
-            self.out = DiscriminatorFinalBlockProgressive(4, 2, name='disc_final', use_sn=True)
+            self.out = DiscriminatorFinalBlockProgressive(4, 2, name='disc_final', use_sn=False)
 
         def call(self, x, training=None, alpha=1.0):
             y = getattr(self, f'layer_in_{self.resolution}')(x)
@@ -215,8 +215,8 @@ def discriminator_mnist(resolution):
     return Discriminator()
 
 def gan_mnist(model_dir, resolution, noise_dims, map_depth, g_lr, d_lr):
-    g_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(g_lr, 100_000, 0.98)
-    d_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(d_lr, 100_000, 0.98)
+    g_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(g_lr, 100_000, 0.999)
+    d_lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(d_lr, 100_000, 0.999)
     generator_optimizer = tf.keras.optimizers.Adam(g_lr_schedule,
                                                    beta_1=pc.adam_beta1,
                                                    beta_2=pc.adam_beta2)
