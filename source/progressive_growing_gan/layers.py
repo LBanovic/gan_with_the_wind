@@ -30,8 +30,6 @@ class MappingScale(layers.Layer):
     def call(self, inputs, **kwargs):
         x = inputs
         for i in range(self.map_depth):
-            import pdb;
-            pdb.set_trace()
             x = getattr(self, f'map_{i}')(x)
         return x
 
@@ -68,6 +66,7 @@ class WeightScaleDense(layers.Layer):
         kernel_shape = [flatshape, self.filters]
         self.w = self.add_weight(name='kernel', shape=kernel_shape, trainable=True,
                                  initializer='random_normal', dtype='float32')
+        import pdb; pdb.set_trace()
         self.scale = tf.constant(self.gain / np.sqrt(np.prod(kernel_shape[:-1])), dtype='float32')
 
     def call(self, inputs, **kwargs):
