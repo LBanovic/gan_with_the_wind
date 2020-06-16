@@ -31,7 +31,7 @@ restore_from_epoch = 7
 
 batch_size = 64
 train_set_size = 10_000
-test_for_fid = 10_000
+test_for_fid = 10_000 // 64
 
 g_lr = 0.001
 d_lr = 0.001
@@ -98,6 +98,7 @@ for res in range(start_res, maxres + 1):
                     start = t
                 alpha = get_alpha(batch_index=j + 1, batch_epoch=i)
                 gan.train_on_batch(image, noise, alpha=alpha)
+            print('Epoch done.')
             epoch_cleanup(gan, overall_epoch, res, savedir)
             overall_epoch += 1
 
@@ -110,6 +111,7 @@ for res in range(start_res, maxres + 1):
                 print(f"{j * batch_size} images shown during learning in {t - start} s.")
                 start = t
             gan.train_on_batch(image, noise)
+        print('Epoch done.')
         epoch_cleanup(gan, overall_epoch, savedir, seed)
         overall_epoch += 1
 
