@@ -80,5 +80,5 @@ if __name__ == '__main__':
                 results.append(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
                 print(f'Resolution-Epoch: {2 ** res}-{epoch}, FID = {fid}')
         del gan
-    with open(f'{models_dir}.json') as dirjson:
+    with open(f'{models_dir}.json', 'w') as dirjson:
         json.dump(results, dirjson)
