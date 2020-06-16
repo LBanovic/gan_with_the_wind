@@ -20,8 +20,12 @@ class MappingScale(layers.Layer):
     def __init__(self, noise_dims, map_depth, **kwargs):
         super().__init__(**kwargs)
         self.map_depth = map_depth
-        for i in range(map_depth):
-            setattr(self, f'map_{i}', WeightScaleDense(noise_dims, name=f'mapdense_{i}'))
+        self.noise_dims = noise_dims
+
+    def build(self, input_shape):
+        for i in range(self.map_depth):
+            setattr(self, f'map_{i}', WeightScaleDense(self.noise_dims, name=f'mapdense_{i}'))
+
 
     def call(self, inputs, **kwargs):
         x = inputs
