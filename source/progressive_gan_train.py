@@ -9,6 +9,8 @@ import sys
 import os
 import time
 
+import json
+
 from progressive_growing_gan import model
 from visualize_data import visualize
 
@@ -20,7 +22,7 @@ from metrics import FID
 model_dir = sys.argv[1]
 celeba_loc = sys.argv[2]
 # run params
-start_res = 2
+start_res = 6
 
 stabilize_epochs = 1
 learn_epochs = 1
@@ -29,7 +31,7 @@ input_channels = 3
 maxres = 6
 restore_from_epoch = 7
 
-batch_size = 64
+batch_size = 32
 train_set_size = 200_000
 test_for_fid = 10_000 // batch_size
 
@@ -82,7 +84,9 @@ for res in range(start_res, maxres + 1):
     gan.discriminator.summary()
     if res > 2:
         if res == start_res:
-            overall_epoch = restore_from_epoch + 1
+            with open(f'prog_{res - 1}.json') as jsondump:
+                res = json.load(jsondump)
+                minfid, restore_from_epoch = min(res, key=lambda k: k[0])
 
         overall_epoch = 0
 
@@ -116,7 +120,6 @@ for res in range(start_res, maxres + 1):
         epoch_cleanup(gan, overall_epoch, savedir, seed)
         overall_epoch += 1
 
-    import json
     results = []
     for epoch in os.listdir(f'{model_dir}/{2 ** res}x{2 ** res}'):
         if epoch != 'images':
