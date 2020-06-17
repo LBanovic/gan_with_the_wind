@@ -85,8 +85,8 @@ for res in range(start_res, maxres + 1):
     if res > 2:
         if res == start_res:
             with open(f'prog_{res - 1}.json') as jsondump:
-                res = json.load(jsondump)
-                minfid, restore_from_epoch = min(res, key=lambda k: k[0])
+                results = json.load(jsondump)
+                minfid, restore_from_epoch = min(results, key=lambda k: k[0])
 
         overall_epoch = 0
 
