@@ -27,7 +27,7 @@ train_set_size = 200_000
 g_lr = 0.0008
 d_lr = 0.0008
 
-checkpoint_every = 10_000
+checkpoint_every = 50_000 // batch_size
 
 def get_alpha(batch_index, batch_epoch):
     num_batches = train_set_size / batch_size
@@ -80,7 +80,7 @@ for epoch in range(fine_tune_epochs):
             alpha = 1
         gan.train_on_batch(images, noise, alpha=alpha)
         if (j + 1) % checkpoint_every == 0:
-            epoch_cleanup(gan, epoch + start_epoch, j + 1, savedir, seed)
+            epoch_cleanup(gan, epoch + start_epoch, (j + 1) * batch_size, savedir, seed)
             t = time.time()
             print(f'{(j + 1) * batch_size} images shown in {t - s}')
             s = t
