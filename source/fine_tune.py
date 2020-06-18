@@ -14,24 +14,25 @@ celeba_loc = sys.argv[2]
 
 fine_tune_epochs = 2
 stabilize = True
-start_epoch = 1
+start_epoch = 2
+stabilizing_epochs = 4
 
 res = 6
 input_dim = 512
 input_channels = 3
 
-batch_size = 4
+batch_size = 32
 train_set_size = 200_000
 
-g_lr = 0.0005
-d_lr = 0.0005
+g_lr = 0.0008
+d_lr = 0.0008
 
 checkpoint_every = 10_000
 
 def get_alpha(batch_index, batch_epoch):
     num_batches = train_set_size / batch_size
-    maxnum_batch = num_batches * fine_tune_epochs
-    current_batch = batch_epoch * num_batches + batch_index
+    maxnum_batch = num_batches * stabilizing_epochs
+    current_batch = (batch_epoch + start_epoch) * num_batches + batch_index
     return current_batch / maxnum_batch
 
 def get_savedir(res):
