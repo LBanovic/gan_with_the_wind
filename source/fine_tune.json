@@ -1,1 +1,11 @@
-["Resolution-Epoch: 64-2_0, FID = 2027.4681552026277", "Resolution-Epoch: 64-1_30000, FID = 2814.4223037373204", "Resolution-Epoch: 64-1_0, FID = 2521.238071579513", "Resolution-Epoch: 64-1_20000, FID = 2979.830432860152", "Resolution-Epoch: 64-2_10000, FID = 2101.162790124318", "Resolution-Epoch: 64-1, FID = 2527.0678249243233", "Resolution-Epoch: 64-1_50000, FID = 2026.8164560930074", "Resolution-Epoch: 64-1_40000, FID = 2435.8675075942474", "Resolution-Epoch: 64-1_10000, FID = 14763.349504198497"]
+[
+  "Resolution-Epoch: 64-2_0, FID = 2027.4681552026277",
+  "Resolution-Epoch: 64-1_30000, FID = 2814.4223037373204",
+  "Resolution-Epoch: 64-1_0, FID = 2521.238071579513",
+  "Resolution-Epoch: 64-1_20000, FID = 2979.830432860152",
+  "Resolution-Epoch: 64-2_10000, FID = 2101.162790124318",
+  "Resolution-Epoch: 64-1, FID = 2527.0678249243233",
+  "Resolution-Epoch: 64-1_50000, FID = 2026.8164560930074",
+  "Resolution-Epoch: 64-1_40000, FID = 2435.8675075942474",
+  "Resolution-Epoch: 64-1_10000, FID = 14763.349504198497"
+]

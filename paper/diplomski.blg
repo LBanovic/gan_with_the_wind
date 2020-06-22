@@ -1,122 +1,79 @@
-This is BibTeX, Version 0.99d (MiKTeX 2.9.7440 64-bit)
+This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: diplomski.aux
 Reallocating 'name_of_file' (item size: 1) to 9 items.
-I couldn't open auxiliary file uvod.aux
----line 4 of file diplomski.aux
- : \@input{uvod.aux
- :                 }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: uvod.aux
 Reallocating 'name_of_file' (item size: 1) to 23 items.
-I couldn't open auxiliary file generativni_modeli.aux
----line 5 of file diplomski.aux
- : \@input{generativni_modeli.aux
- :                               }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: generativni_modeli.aux
 Reallocating 'name_of_file' (item size: 1) to 17 items.
-I couldn't open auxiliary file duboke_mreze.aux
----line 6 of file diplomski.aux
- : \@input{duboke_mreze.aux
- :                         }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: duboke_mreze.aux
 Reallocating 'name_of_file' (item size: 1) to 27 items.
-I couldn't open auxiliary file generativne_suparnicke.aux
----line 7 of file diplomski.aux
- : \@input{generativne_suparnicke.aux
- :                                   }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: generativne_suparnicke.aux
 Reallocating 'name_of_file' (item size: 1) to 21 items.
-I couldn't open auxiliary file pregled_podrucja.aux
----line 8 of file diplomski.aux
- : \@input{pregled_podrucja.aux
- :                             }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: pregled_podrucja.aux
 Reallocating 'name_of_file' (item size: 1) to 22 items.
-I couldn't open auxiliary file funkcije_pogreske.aux
----line 9 of file diplomski.aux
- : \@input{funkcije_pogreske.aux
- :                              }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: funkcije_pogreske.aux
 Reallocating 'name_of_file' (item size: 1) to 33 items.
-I couldn't open auxiliary file normalizacija_regularizacija.aux
----line 10 of file diplomski.aux
- : \@input{normalizacija_regularizacija.aux
- :                                         }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: normalizacija_regularizacija.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
-I couldn't open auxiliary file elementi_arhitekture.aux
----line 11 of file diplomski.aux
- : \@input{elementi_arhitekture.aux
- :                                 }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: elementi_arhitekture.aux
 Reallocating 'name_of_file' (item size: 1) to 18 items.
-I couldn't open auxiliary file prijasnji_rad.aux
----line 12 of file diplomski.aux
- : \@input{prijasnji_rad.aux
- :                          }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: prijasnji_rad.aux
 Reallocating 'name_of_file' (item size: 1) to 13 items.
-I couldn't open auxiliary file prototip.aux
----line 13 of file diplomski.aux
- : \@input{prototip.aux
- :                     }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: prototip.aux
 Reallocating 'name_of_file' (item size: 1) to 15 items.
-I couldn't open auxiliary file treniranje.aux
----line 14 of file diplomski.aux
- : \@input{treniranje.aux
- :                       }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: treniranje.aux
 Reallocating 'name_of_file' (item size: 1) to 14 items.
-I couldn't open auxiliary file rezultati.aux
----line 15 of file diplomski.aux
- : \@input{rezultati.aux
- :                      }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: rezultati.aux
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+A level-1 auxiliary file: zakljucak.aux
 Reallocating 'name_of_file' (item size: 1) to 11 items.
 Reallocating 'name_of_file' (item size: 1) to 4 items.
 The style file: fer.bst
-I found no \citation commands---while reading file diplomski.aux
 Database file #1: literatura.bib
-You've used 0 entries,
+Warning--to sort, need author or key in lip_cont
+Warning--empty year in lip_cont
+Warning--empty year in progressive_gan_git
+Warning--empty year in nash_eq
+You've used 31 entries,
             2773 wiz_defined-function locations,
-            606 strings with 5108 characters,
-and the built_in function-call counts, 33 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 10
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
-chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+            736 strings with 10693 characters,
+and the built_in function-call counts, 15794 in all, are:
+= -- 1235
+> -- 1395
+< -- 11
++ -- 468
+- -- 437
+* -- 1326
+:= -- 2464
+add.period$ -- 83
+call.type$ -- 31
+change.case$ -- 233
+chr.to.int$ -- 31
+cite$ -- 67
+duplicate$ -- 557
+empty$ -- 1079
+format.name$ -- 477
+if$ -- 3243
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 0
-newline$ -- 8
-num.names$ -- 0
-pop$ -- 0
+missing$ -- 8
+newline$ -- 152
+num.names$ -- 122
+pop$ -- 588
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 204
 quote$ -- 0
-skip$ -- 1
+skip$ -- 560
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 162
+swap$ -- 59
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
+type$ -- 336
+warning$ -- 4
+while$ -- 99
 width$ -- 0
-write$ -- 7
-(There were 13 error messages)
+write$ -- 358
+(There were 4 warnings)

@@ -9,7 +9,7 @@ Da bi naš model bio uspješan, potrebno je da ima dovoljan kapacitet - da bude 
 \end{equation*}
 Tu dolazimo do idućeg izazova - u općem slučaju ne znamo koja vrsta nelinearnosti je potrebna za oblikovanje kvalitetnog modela. Jedno od mogućih rješenja bila bi metoda pokušaja i pogrešaka - isprobati mnoštvo različitih opcija te se odlučiti za najbolju. Ovaj pristup je vremenski zahtjevan, ali i uvjetovan velikim domenskim znanjem. 
 
-Izvrsno bi bilo kad bismo optimizacijskim postupkom istovremeno mogli naučiti model i pronaći odgovarajuću transformaciju ulaza. Srećom, tu na scenu stupaju duboki modeli. Njihova osnovna ideja je aproksimacija složenih ovisnosti između ulaza i izlaza kompozicijom nelinearnih funkcija. Funkcije moraju biti nelinearne u idućem stadiju kompozicije uzimat ćemo i njihovu linearnu kombinaciju, a linearna kombinacija linearnih kombinacija je opet linearna kombinacija, tj. nije postignut nikakav napredak. Takve funkcije nazivamo aktivacijskima. Dakle, neuronska bi se mreža mogla prikazati na sljedeći način:
+Izvrsno bi bilo kad bismo optimizacijskim postupkom istovremeno mogli naučiti model i pronaći odgovarajuću transformaciju ulaza. Srećom, tu na scenu stupaju duboki modeli. Njihova osnovna ideja je aproksimacija složenih ovisnosti između ulaza i izlaza kompozicijom nelinearnih funkcija. Funkcije moraju biti nelinearne -- u idućem stadiju kompozicije uzimat ćemo i njihovu linearnu kombinaciju, a linearna kombinacija linearnih kombinacija je opet linearna kombinacija, tj. nije postignut nikakav napredak. Takve funkcije nazivamo aktivacijskima. Dakle, neuronska bi se mreža mogla prikazati na sljedeći način:
 \begin{equation*}
 	h = \sigma(\vec{w}_1^T\sigma(\vec{w}_2^T\sigma(...))),
 \end{equation*}
@@ -25,4 +25,4 @@ Problem kod ovog pristupa je, da bismo pronašli stvarni gradijent funkcije gubi
 	\item odredi procjenu gradijenta kao $\vec{g} = \frac{1}{m}\nabla_{\vec{\theta}}\sum_i L(h(\vec{x_i}; \vec{\theta}))$, gdje je $m$ veličina minigrupe, $\vec{\theta}$ parametri modela, $h$ definicija modela, a $L$ funkcija gubitka,
 	\item ažuriraj parametre: $\vec{\theta} \leftarrow \vec{\theta} - \epsilon\vec{g}$, gdje je $\epsilon$ stopa učenja.
 \end{enumerate}
-Ove korake ponavljamo do ispunjenja nekog od uvjeta zaustavljanja, na primjer broja ažuriranja. U praksi koristimo nadogradnje s adaptivnom stopom učenja koje pospješuju stabilnost treniranja, kao što je Adam \todo{ref adam} ili RMSProp \todo{ref rmsprop}, ali njihovi implementacijski detalji nisu u fokusu ovoga rada.
+Ove korake ponavljamo do ispunjenja nekog od uvjeta zaustavljanja, na primjer broja ažuriranja. U praksi koristimo nadogradnje s adaptivnom stopom učenja koje pospješuju stabilnost treniranja, kao što je Adam \citep{kingma2014adam} ili RMSProp, ali njihovi implementacijski detalji nisu u fokusu ovoga rada.

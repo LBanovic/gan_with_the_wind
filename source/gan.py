@@ -18,22 +18,12 @@ class GAN:
 
 
     def train_on_batch(self, images, noise, **kwargs):
+        # TODO split losses, first update discriminator, then generator
         with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
             gen_loss, disc_loss = self.get_losses(images, noise, training=True, **kwargs)
 
         gen_gradients = gen_tape.gradient(gen_loss, self.generator.trainable_variables)
         disc_gradients = disc_tape.gradient(disc_loss, self.discriminator.trainable_variables)
-
-        # try:
-        #     tf.debugging.check_numerics(gen_gradients, 'Generator gradients')
-        # except tf.errors.InvalidArgumentError as e:
-        #     print(e)
-        #     import pdb; pdb.set_trace()
-        # try:
-        #     tf.debugging.check_numerics(disc_gradients, 'Discriminator gradients')
-        # except tf.errors.InvalidArgumentError as e:
-        #     print(e)
-        #     import pdb; pdb.set_trace()
 
         self.generator_optimizer.apply_gradients(zip(gen_gradients, self.generator.trainable_variables))
         self.discriminator_optimizer.apply_gradients(zip(disc_gradients, self.discriminator.trainable_variables))
@@ -46,7 +36,7 @@ class GAN:
 
         gen_loss = self.generator_loss(fake_output)
         disc_loss = self.discriminator_loss(real_output, fake_output)
-        return gen_loss, disc_loss
+        return tf.reduce_mean(gen_loss), tf.reduce_mean(disc_loss)
 
     def make_checkpoint(self, epoch, store_optimizers=False):
         dir = os.path.join(self.model_dir, f'{epoch}_epoch')

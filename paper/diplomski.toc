@@ -1,18 +1,18 @@
 \babel@toc {croatian}{}
 \contentsline {chapter}{\numberline {1}Uvod}{1}%
 \contentsline {section}{\numberline {1.1}Generativni modeli}{2}%
-\contentsline {section}{\numberline {1.2}Duboke neuronske mreže}{5}%
-\contentsline {section}{\numberline {1.3}Generativne suparničke mreže}{7}%
-\contentsline {subsection}{\numberline {1.3.1}Princip rada}{7}%
-\contentsline {subsection}{\numberline {1.3.2}Treniranje}{8}%
-\contentsline {subsection}{\numberline {1.3.3}Teorijska podloga}{9}%
-\contentsline {chapter}{\numberline {2}Pregled područja}{11}%
-\contentsline {section}{\numberline {2.1}Vrednovanje modela}{12}%
-\contentsline {subsection}{\numberline {2.1.1}Vrijednost \textit {Inception}}{12}%
-\contentsline {subsection}{\numberline {2.1.2}Fréchetova \textit {Inception} udaljenost}{12}%
-\contentsline {subsection}{\numberline {2.1.3}Preciznost i odziv}{13}%
-\contentsline {section}{\numberline {2.2}Funkcije pogreške}{14}%
-\contentsline {subsection}{\numberline {2.2.1}Wassersteinov gubitak}{14}%
+\contentsline {section}{\numberline {1.2}Duboke neuronske mreže}{4}%
+\contentsline {section}{\numberline {1.3}Generativne suparničke mreže}{6}%
+\contentsline {subsection}{\numberline {1.3.1}Princip rada}{6}%
+\contentsline {subsection}{\numberline {1.3.2}Treniranje}{7}%
+\contentsline {subsection}{\numberline {1.3.3}Teorijska podloga}{8}%
+\contentsline {chapter}{\numberline {2}Pregled područja}{10}%
+\contentsline {section}{\numberline {2.1}Vrednovanje modela}{11}%
+\contentsline {subsection}{\numberline {2.1.1}Vrijednost \textit {Inception}}{11}%
+\contentsline {subsection}{\numberline {2.1.2}Fréchetova \textit {Inception} udaljenost}{11}%
+\contentsline {subsection}{\numberline {2.1.3}Preciznost i odziv}{12}%
+\contentsline {section}{\numberline {2.2}Funkcije pogreške}{13}%
+\contentsline {subsection}{\numberline {2.2.1}Wassersteinov gubitak}{13}%
 \contentsline {subsection}{\numberline {2.2.2}Gubitak najmanjih kvadrata}{15}%
 \contentsline {section}{\numberline {2.3}Normalizacijske i regularizacijske tehnike}{18}%
 \contentsline {subsection}{\numberline {2.3.1}Regularizacija}{18}%
@@ -25,13 +25,13 @@
 \contentsline {section}{\numberline {2.4}Arhitektura dubokih mreža}{22}%
 \contentsline {subsection}{\numberline {2.4.1}Potpuno povezani sloj}{22}%
 \contentsline {subsection}{\numberline {2.4.2}Konvolucijski sloj}{22}%
-\contentsline {subsection}{\numberline {2.4.3}Slojevi sažimanja i proširivanja}{24}%
-\contentsline {section}{\numberline {2.5}Dosadašnji napredak}{26}%
-\contentsline {chapter}{\numberline {3}Prototipna implementacija}{28}%
-\contentsline {section}{\numberline {3.1}Arhitektura}{28}%
-\contentsline {section}{\numberline {3.2}Učenje prototipa}{31}%
-\contentsline {subsection}{\numberline {3.2.1}Skup podataka za učenje}{31}%
-\contentsline {subsection}{\numberline {3.2.2}Postupak učenja}{31}%
-\contentsline {section}{\numberline {3.3}Rezultati}{33}%
-\contentsline {chapter}{\numberline {4}Zaključak}{34}%
-\contentsline {chapter}{Literatura}{35}%
+\contentsline {subsection}{\numberline {2.4.3}Slojevi sažimanja i proširivanja}{25}%
+\contentsline {section}{\numberline {2.5}Dosadašnji napredak}{27}%
+\contentsline {chapter}{\numberline {3}Prototipna implementacija}{29}%
+\contentsline {section}{\numberline {3.1}Arhitektura}{29}%
+\contentsline {section}{\numberline {3.2}Učenje prototipa}{33}%
+\contentsline {subsection}{\numberline {3.2.1}Skup podataka za učenje}{33}%
+\contentsline {subsection}{\numberline {3.2.2}Postupak učenja}{33}%
+\contentsline {section}{\numberline {3.3}Rezultati}{36}%
+\contentsline {chapter}{\numberline {4}Zaključak}{40}%
+\contentsline {chapter}{Literatura}{41}%

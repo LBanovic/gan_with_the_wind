@@ -1,7 +1,10 @@
-\documentclass[times, utf8, diplomski]{fer}
+\documentclass[times, utf8, diplomski, numeric]{fer}
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{amsmath}
+\usepackage{url}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{subcaption}
 \newcommand\todo[1]{\textcolor{red}{#1}}
 
 \begin{document}
@@ -37,24 +40,22 @@
 \include{prototip}
 \include{treniranje}
 \include{rezultati}
-\chapter{Zaključak}
-Zaključak.
-
+\include{zakljucak}
 \bibliography{literatura}
 \bibliographystyle{fer}
 
 \begin{sazetak}
-Sažetak na hrvatskom jeziku.
+Generativne suparničke mreže moćna su klasa dubokih modela i vrlo aktivno područje istraživanja. U ovom radu predstavljamo njihov osnovni koncept te iznosimo ideju iza generativnih modela općenito. Budući da se model u najširem smislu temelji na suradnji između dvije duboke neuronske mreže, na visokoj razini pojašnjavamo kako i one funkcioniraju. Iznosimo i uobičajeno korištene osnovne slojeve neuronskih mreža korištenih mreža te pregled dosadašnjeg rada. I za kraj, pokazujemo implementaciju generativnih suparničkih mreža temeljenih na progresivnom rastu i njihovu primjenu pri generiranju slika ljudskih lica koristeći skup podataka CelebA rezolucije $64 \times 64$ te vrednujemo rezultate.
 
-\kljucnerijeci{Ključne riječi, odvojene zarezima.}
+\kljucnerijeci{generativne suparničke mreže, duboko učenje, generiranje slika, generativni model, progresivni rast mreža}
 \end{sazetak}
 
 % TODO: Navedite naslov na engleskom jeziku.
-\engtitle{Title}
+\engtitle{Application of Generative Adversarial Networks on Image Generation}
 \begin{abstract}
-Abstract.
+Generative adversarial networks are a powerful class of deep learning models and a particularly active field of research. In this work, we present the basic idea of generative models and the concept of generative adversarial networks. Since this model is, in the broadest sense, based on the cooperation of two neural networks, we present a broad overview of this concept as well. We note the neural layers usually used in such a system and the work done so far. Finally, we implement a variant of this concept based on progressive growing and apply it to generation of images of human faces of $64 \times 64$ resolution  using the CelebA dataset and evaluate our results.
 
-\keywords{Keywords.}
+\keywords{generative adversarial networks, deep learning, image generation, generative models, progressive growing}
 \end{abstract}
 
 \end{document}

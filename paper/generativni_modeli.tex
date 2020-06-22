@@ -36,14 +36,11 @@ Zasad nemamo problema sa složenosti ovog izračuna. Međutim, pretpostavimo da 
 \begin{equation*}
 	p(\vec{x}) = \int p(z)\mathcal{N}(\vec{x}|\mu_z, \Sigma_z)dx
 \end{equation*}
-Izračun ovog izraza je vremenski vrlo složen te se u praksi pribjegava aproksimacijama da bi se složenost ublažila, kao što je određivanje donje granice log-izglednosti. \todo{VAE ref}
+Izračun ovog izraza je vremenski vrlo složen te se u praksi pribjegava aproksimacijama da bi se složenost ublažila, kao što je određivanje donje granice log-izglednosti. \citep{kingma2013autoencoding}
 
 Naravno, potrebno je napomenuti da odabir omjera traktabilnosti i ekspresivnosti itekako ovisi o problemu na koje ćemo primijeniti model.
 
-S druge strane, modeli koji implicitno modeliraju distribuciju ulaznog prostora te ih se može trenirati kao crne kutije, bez da nam je poznata funkcija gustoće na kojoj se temelji njihov postupak generiranja. Postupak treniranja uglavnom se oslanja na ocjenu kvalitete generiranih primjera, a ne procjenu parametara pretpostavljene funkcije gustoće.
-
-\todo {wrap it up nicely}
-
+Alternativa ovim modelima su modeli koji implicitno modeliraju distribuciju ulaznog prostora te ih se može trenirati kao crne kutije, bez da nam je poznata funkcija gustoće na kojoj se temelji njihov postupak generiranja. Postupak treniranja uglavnom se oslanja na ocjenu kvalitete generiranih primjera, a ne procjenu parametara pretpostavljene funkcije gustoće.
 
 
 

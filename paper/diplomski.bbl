@@ -1,8 +1,203 @@
-\begin{thebibliography}{0}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[lip()]{lip_cont}
+Lipschitz continuity.
+\newblock
+  \url{https://users.wpi.edu/~walker/MA500/HANDOUTS/LipschitzContinuity.pdf}.
+\newblock Zadnji pristup: 21. lipnja 2020.
+
+\bibitem[Abadi et~al.(2015)Abadi, Agarwal, Barham, Brevdo, Chen, Citro,
+  Corrado, Davis, Dean, Devin, Ghemawat, Goodfellow, Harp, Irving, Isard, Jia,
+  Jozefowicz, Kaiser, Kudlur, Levenberg, Man\'{e}, Monga, Moore, Murray, Olah,
+  Schuster, Shlens, Steiner, Sutskever, Talwar, Tucker, Vanhoucke, Vasudevan,
+  Vi\'{e}gas, Vinyals, Warden, Wattenberg, Wicke, Yu, i
+  Zheng]{tensorflow2015-whitepaper}
+Mart\'{\i}n Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
+  Craig Citro, Greg~S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin,
+  Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard,
+  Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh
+  Levenberg, Dandelion Man\'{e}, Rajat Monga, Sherry Moore, Derek Murray, Chris
+  Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal
+  Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\'{e}gas,
+  Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, i
+  Xiaoqiang Zheng.
+\newblock {TensorFlow}: Large-scale machine learning on heterogeneous systems,
+  2015.
+\newblock URL \url{https://www.tensorflow.org/}.
+\newblock Software available from tensorflow.org.
+
+\bibitem[Arjovsky et~al.(2017)Arjovsky, Chintala, i
+  Bottou]{arjovsky2017wasserstein}
+Martin Arjovsky, Soumith Chintala, i Léon Bottou.
+\newblock Wasserstein gan, 2017.
+
+\bibitem[Ba et~al.(2016)Ba, Kiros, i Hinton]{ba2016layer}
+Jimmy~Lei Ba, Jamie~Ryan Kiros, i Geoffrey~E. Hinton.
+\newblock Layer normalization, 2016.
+
+\bibitem[Chollet et~al.(2015)]{chollet2015keras}
+Fran\c{c}ois Chollet et~al.
+\newblock Keras.
+\newblock \url{https://keras.io}, 2015.
+
+\bibitem[Dumoulin et~al.(2016)Dumoulin, Belghazi, Poole, Mastropietro, Lamb,
+  Arjovsky, i Courville]{dumoulin2016adversarially}
+Vincent Dumoulin, Ishmael Belghazi, Ben Poole, Olivier Mastropietro, Alex Lamb,
+  Martin Arjovsky, i Aaron Courville.
+\newblock Adversarially learned inference, 2016.
+
+\bibitem[Goodfellow et~al.(2014)Goodfellow, Pouget-Abadie, Mirza, Xu,
+  Warde-Farley, Ozair, Courville, i Bengio]{orig_paper}
+Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley,
+  Sherjil Ozair, Aaron Courville, i Yoshua Bengio.
+\newblock Generative adversarial nets.
+\newblock U Z.~Ghahramani, M.~Welling, C.~Cortes, N.~D. Lawrence, i K.~Q.
+  Weinberger, urednici, \emph{Advances in Neural Information Processing Systems
+  27}, stranice 2672--2680. Curran Associates, Inc., 2014.
+\newblock URL
+  \url{http://papers.nips.cc/paper/5423-generative-adversarial-nets.pdf}.
+
+\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, i
+  Courville]{Goodfellow-et-al-2016}
+Ian Goodfellow, Yoshua Bengio, i Aaron Courville.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press, 2016.
+\newblock \url{http://www.deeplearningbook.org}.
+
+\bibitem[Gulrajani et~al.(2017)Gulrajani, Ahmed, Arjovsky, Dumoulin, i
+  Courville]{gulrajani2017improved}
+Ishaan Gulrajani, Faruk Ahmed, Martin Arjovsky, Vincent Dumoulin, i Aaron
+  Courville.
+\newblock Improved training of wasserstein gans, 2017.
+
+\bibitem[He et~al.(2015)He, Zhang, Ren, i Sun]{he2015init}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, i Jian Sun.
+\newblock Delving deep into rectifiers: Surpassing human-level performance on
+  imagenet classification.
+\newblock U \emph{The IEEE International Conference on Computer Vision (ICCV)},
+  December 2015.
+
+\bibitem[Heusel et~al.(2017)Heusel, Ramsauer, Unterthiner, Nessler, i
+  Hochreiter]{heusel2017gans}
+Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernhard Nessler, i Sepp
+  Hochreiter.
+\newblock Gans trained by a two time-scale update rule converge to a local nash
+  equilibrium, 2017.
+
+\bibitem[Ioffe i Szegedy(2015)]{ioffe2015batch}
+Sergey Ioffe i Christian Szegedy.
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift, 2015.
+
+\bibitem[Karras et~al.()Karras, Aila, Laine, i Lehtinen]{progressive_gan_git}
+Tero Karras, Timo Aila, Samuli Laine, i Jaakko Lehtinen.
+\newblock \emph{Progressive Growing of GANs for Improved Quality, Stability,
+  and Variation - Git Repository}.
+\newblock Zadnji pristup: 22. lipnja 2020.
+
+\bibitem[Karras et~al.(2017)Karras, Aila, Laine, i
+  Lehtinen]{karras2017progressive}
+Tero Karras, Timo Aila, Samuli Laine, i Jaakko Lehtinen.
+\newblock Progressive growing of gans for improved quality, stability, and
+  variation, 2017.
+
+\bibitem[Karras et~al.(2019)Karras, Laine, i Aila]{karras2019style}
+Tero Karras, Samuli Laine, i Timo Aila.
+\newblock A style-based generator architecture for generative adversarial
+  networks.
+\newblock U \emph{Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, stranice 4401--4410, 2019.
+
+\bibitem[Kingma i Ba(2014)]{kingma2014adam}
+Diederik~P. Kingma i Jimmy Ba.
+\newblock Adam: A method for stochastic optimization, 2014.
+
+\bibitem[Kingma i Welling(2013)]{kingma2013autoencoding}
+Diederik~P Kingma i Max Welling.
+\newblock Auto-encoding variational bayes, 2013.
+
+\bibitem[Kurach et~al.(2018)Kurach, Lucic, Zhai, Michalski, i
+  Gelly]{kurach2018largescale}
+Karol Kurach, Mario Lucic, Xiaohua Zhai, Marcin Michalski, i Sylvain Gelly.
+\newblock A large-scale study on regularization and normalization in gans,
+  2018.
+
+\bibitem[Liu et~al.(2015)Liu, Luo, Wang, i Tang]{liu2015faceattributes}
+Ziwei Liu, Ping Luo, Xiaogang Wang, i Xiaoou Tang.
+\newblock Deep learning face attributes in the wild.
+\newblock U \emph{Proceedings of International Conference on Computer Vision
+  (ICCV)}, December 2015.
+
+\bibitem[Lucic et~al.(2017)Lucic, Kurach, Michalski, Gelly, i
+  Bousquet]{lucic2017gans}
+Mario Lucic, Karol Kurach, Marcin Michalski, Sylvain Gelly, i Olivier Bousquet.
+\newblock Are gans created equal? a large-scale study, 2017.
+
+\bibitem[Mao et~al.(2016)Mao, Li, Xie, Lau, Wang, i Smolley]{mao2016squares}
+Xudong Mao, Qing Li, Haoran Xie, Raymond Y.~K. Lau, Zhen Wang, i Stephen~Paul
+  Smolley.
+\newblock Least squares generative adversarial networks, 2016.
+
+\bibitem[Mirza i Osindero(2014)]{mirza2014conditional}
+Mehdi Mirza i Simon Osindero.
+\newblock Conditional generative adversarial nets, 2014.
+
+\bibitem[Miyato et~al.(2018)Miyato, Kataoka, Koyama, i
+  Yoshida]{miyato2018spectral}
+Takeru Miyato, Toshiki Kataoka, Masanori Koyama, i Yuichi Yoshida.
+\newblock Spectral normalization for generative adversarial networks, 2018.
+
+\bibitem[Nash et~al.(1950)]{nash1950equilibrium}
+John~F Nash et~al.
+\newblock Equilibrium points in n-person games.
+\newblock \emph{Proceedings of the national academy of sciences}, 36\penalty0
+  (1):\penalty0 48--49, 1950.
+
+\bibitem[Odena et~al.(2016)Odena, Dumoulin, i Olah]{odena2016deconvolution}
+Augustus Odena, Vincent Dumoulin, i Chris Olah.
+\newblock Deconvolution and checkerboard artifacts.
+\newblock \emph{Distill}, 2016.
+\newblock \doi{10.23915/distill.00003}.
+\newblock URL \url{http://distill.pub/2016/deconv-checkerboard}.
+
+\bibitem[Qi(2017)]{qi2017losssensitive}
+Guo-Jun Qi.
+\newblock Loss-sensitive generative adversarial networks on lipschitz
+  densities, 2017.
+
+\bibitem[Radford et~al.(2015)Radford, Metz, i
+  Chintala]{radford2015unsupervised}
+Alec Radford, Luke Metz, i Soumith Chintala.
+\newblock Unsupervised representation learning with deep convolutional
+  generative adversarial networks, 2015.
+
+\bibitem[Salimans et~al.(2016)Salimans, Goodfellow, Zaremba, Cheung, Radford, i
+  Chen]{salimans2016improved}
+Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, i
+  Xi~Chen.
+\newblock Improved techniques for training gans, 2016.
+
+\bibitem[Sethi()]{nash_eq}
+R.~Sethi.
+\newblock Nash equilibrium.
+\newblock \url{http://www.columbia.edu/~rs328/NashEquilibrium.pdf}.
+\newblock Zadnji pristup: 21. lipnja 2020.
+
+\bibitem[Čupić(2019)]{cupic2019nadpred}
+Marko Čupić.
+\newblock Duboko učenje: Optimizacija parametara modela.
+\newblock Predavanje, dostupno na:
+  \url{http://www.zemris.fer.hr/~ssegvic/du/du3optimization.pdf}, 2019.
+\newblock Zadnji pristup: 22. lipnja 2020.
+
+\bibitem[Zhu et~al.(2017)Zhu, Park, Isola, i Efros]{zhu2017unpaired}
+Jun-Yan Zhu, Taesung Park, Phillip Isola, i Alexei~A. Efros.
+\newblock Unpaired image-to-image translation using cycle-consistent
+  adversarial networks, 2017.
 
 \end{thebibliography}
