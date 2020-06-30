@@ -151,3 +151,4 @@ papers/
 *.vscode
 *.tfrecords
 source/images
+*.zip
